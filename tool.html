@@ -49,9 +49,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </template>
           </div>
         </div>
-        <div class="col-sm-6 col-md-8 main">
+        <div class="col-sm-6 col-md-8 main" id="main-section">
           <template is="dom-if" if={{showBazaar}}>
-            <cb-bazaar></cb-bazaar>
+            <cb-bazaar id="bazaar"></cb-bazaar>
           </template>
           <template is="dom-if" if={{showStudio}}>
             studio
@@ -138,6 +138,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           description: 'Who gives a fuck?'
         }
       ];
+
+      document.querySelector("#main-section").addEventListener('component-selection', function(e){
+        var url = e.detail.url;
+        var type = e.detail.type;
+        self.showBazaar = false;
+        self.showStudio = false;
+      });
     }
   });
 
