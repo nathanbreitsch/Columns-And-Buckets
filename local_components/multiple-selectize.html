@@ -1,0 +1,28 @@
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+<dom-module id="multiple-selectize">
+  <template>
+    <select class='form-control'>
+      <template is='dom-repeat' items="{{options}}">
+        <option value="{{item.name}}">{{item.displayName}}</option>
+      </template>
+    </select>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'multiple-selectize',
+    properties: {
+      value: String,
+      options: Array
+    },
+    ready: function(){
+      var self = this;
+      $("select").selectize();
+      console.log(self.options);
+    }
+  });
+</script>

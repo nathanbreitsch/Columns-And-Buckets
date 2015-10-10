@@ -1,0 +1,23 @@
+{
+  "name": "hackathon",
+  "version": "0.0.0",
+  "authors": [
+    "Nathan Breitsch <nathanbreitsch@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.4"
+  },
+  "resolutions": {
+    "polymer": "^1.0.0",
+    "webcomponentsjs": "^0.7.2"
+  }
+}
