@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
 <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="local_components/multiple-selectize.html">
+<link rel="import" href="local_components/cb-bazaar.html"/>
 
 <dom-module id="vis-tool">
 
@@ -27,11 +28,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project</a>
+          <a class="navbar-brand" href="#">Columns & Buckets</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Thing</a></li>
+            <li><a role="button" on-click="goToStudio">Studio</a></li>
+            <li><a role="button" on-click="goToBazaar">Bazaar</a></li>
           </ul>
         </div>
       </div>
@@ -48,7 +50,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </div>
         </div>
         <div class="col-sm-6 col-md-8 main">
-          <h1>Vis</h1>
+          <template is="dom-if" if={{showBazaar}}>
+            <cb-bazaar></cb-bazaar>
+          </template>
+          <template is="dom-if" if={{showStudio}}>
+            studio
+          </template>
         </div>
 
         <div class="col-sm-3 col-md-2 sidebar sidebar-right">
@@ -76,8 +83,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     properties : {
 
     },
+
     ready: function(){
       var self = this;
+
+      self.showBazaar = true;
+      self.showStudio = false;
+
+      self.goToBazaar = function(){
+        self.showBazaar = true;
+        self.showStudio = false;
+      };
+
+      self.goToStudio = function(){
+        self.showBazaar = false;
+        self.showStudio = true;
+      }
+
+      self.message = "this is a test message";
+
       self.columns = [
         {
           name: 'column1',

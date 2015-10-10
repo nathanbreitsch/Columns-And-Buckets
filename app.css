@@ -1,7 +1,21 @@
+body{
+  overflow: hidden;
+}
+
+.bazaar-image{
+
+}
+
+cb-bazaar > div.cb-bazaar{
+  width: 100%;
+  padding-top: 10px;
+}
+
 .sidebar{
   border: 2px;
   background-color: #ddd;
   padding-top: 50px;
+  height: 5000px;
 }
 
 .main{

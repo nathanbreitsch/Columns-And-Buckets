@@ -1,14 +1,17 @@
-<script src="/bower_components/jquery/dist/jquery.js"></script>
+<!--<script src="/bower_components/jquery/dist/jquery.js"></script>-->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/selectize/dist/js/standalone/selectize.js"></script>
+<link rel="stylesheet" href="/bower_components/selectize/dist/css/selectize.bootstrap3.css"/>
 <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+
 
 <dom-module id="multiple-selectize">
   <template>
-    <select class='form-control'>
-      <template is='dom-repeat' items="{{options}}">
-        <option value="{{item.name}}">{{item.displayName}}</option>
-      </template>
-    </select>
+    <div>
+      <select class='form-control' id="mainSelectBox">
+
+      </select>
+    </div>
   </template>
 </dom-module>
 
@@ -21,7 +24,14 @@
     },
     ready: function(){
       var self = this;
-      $("select").selectize();
+      self.displayMarketplace = false;
+
+      var mainSelectBox = this.$.mainSelectBox;
+      $(mainSelectBox).selectize({
+        options: self.options,
+        labelField: 'displayName',
+        valueField: 'name'
+      });
       console.log(self.options);
     }
   });

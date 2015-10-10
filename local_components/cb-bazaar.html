@@ -1,0 +1,120 @@
+
+<!--<script src="/bower_components/jquery/dist/jquery.js"></script>-->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+<dom-module id="cb-bazaar">
+  <template>
+    <div class="container">
+      <div class="row">
+        <form class="form-inline">
+          <div class="form-group">
+            <label> Category: &nbsp</label>
+            <select class="form-control" value="{{category::change}}">
+              <option value="data">Data Sources</option>
+              <option value="vis">Visualizations</option>
+            </select>
+
+          </div>
+          <div class="form-group">
+            <label> &nbsp Search: &nbsp </label>
+            <input type="text" class="form-control"/>
+          </div>
+        </form>
+      </div>
+      <br/>
+
+      <template  is="dom-repeat" items="[[searchResults]]">
+        <div class="row">
+          <div class="col-xs-2">
+            <img src="{{item.imageUrl}}" class="img img-responsive"></img>
+          </div>
+          <div class="col-xs-8">
+            <h4>{{item.name}}</h4>
+            <p>{{item.description}}</p>
+          </div>
+          <div class="col-xs-2">
+            <template is="dom-if" if="{{item.ready}}">
+              <button class="btn btn-success" on-click="connect" item-name="{{item.name}}">Let's Go!</button>
+            </template>
+            <template is="dom-if" if="{{!item.ready}}">
+              <button class="btn btn-success" disabled>Enterprise</button>
+            </template>
+
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'cb-bazaar',
+    properties: {
+      category: String,
+      sources: Array,
+      visualizations: Array,
+      searchResults: {
+        type: Array,
+        computed: 'computeSearchResults(category, sources, visualizations)'
+      }
+    },
+    computeSearchResults: function(category, sources, visualizations){
+      if(category == 'data'){
+        return sources;
+      }
+      else{
+        return visualizations;
+      }
+    },
+    connect: function(item){
+      alert(item.name);
+    },
+    ready: function(){
+      var self = this;
+      self.category = "data";
+
+      self.sources = [
+        {
+          ready: true,
+          name: 'Static JSON over HTTP',
+          description: 'This was the simplest thing I could hack up.',
+          imageUrl: 'http://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/0003/0859/brand.gif?itok=87NIjw_I'
+        },
+        {
+          ready: false,
+          name: 'PostgreSQL',
+          description: 'Retrieve data from table or query directly from your Postgres database.',
+          imageUrl: 'http://www.myintervals.com/blog/wp-content/uploads/2011/12/postgresql-logo1.png'
+        },
+        {
+          ready: false,
+          name: 'Microsoft Excel',
+          description: 'This is your ticket out of Excel Hell. ',
+          imageUrl: 'http://pubpages.unh.edu/~adc1/excel_logo.jpg'
+        }
+      ];
+
+      self.visualizations = [
+        {
+          ready: 'true',
+          name: 'Comparative Word Count',
+          description: 'Compare word frequency information across things, lol'
+        }
+      ];
+
+      self.connect = function(event, detail, target){
+        var name = target.attributes['item-name'];
+        alert(name);
+      };
+
+
+    }
+
+
+  });
+
+
+</script>
