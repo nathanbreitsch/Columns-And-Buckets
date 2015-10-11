@@ -1,14 +1,16 @@
 <!--<script src="/bower_components/jquery/dist/jquery.js"></script>-->
+<!--
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/selectize/dist/js/standalone/selectize.js"></script>
 <link rel="stylesheet" href="/bower_components/selectize/dist/css/selectize.bootstrap3.css"/>
 <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
-
+-->
+<script src="/bower_components/selectize/dist/js/standalone/selectize.js"></script>
 
 <dom-module id="multiple-selectize">
   <template>
     <div>
-      <select class='form-control' id="mainSelectBox">
+      <select class='form-control' id="mainSelectBox" value="{{}}">
 
       </select>
     </div>
@@ -19,20 +21,34 @@
   Polymer({
     is: 'multiple-selectize',
     properties: {
-      value: String,
-      options: Array
+      selection: Array,
+      options: {
+        type: Array,
+        value: [],
+        readOnly: true,
+        observer: 'changeOptions'
+      }
     },
     ready: function(){
       var self = this;
       self.displayMarketplace = false;
-
       var mainSelectBox = this.$.mainSelectBox;
-      $(mainSelectBox).selectize({
+      self.selectizeObject = $(mainSelectBox).selectize({
         options: self.options,
         labelField: 'displayName',
-        valueField: 'name'
-      });
+        valueField: 'name',
+        maxItems: 'null'
+      })[0].selectize;
       console.log(self.options);
+    },
+    changeOptions: function(){
+      var self = this;
+
+
+      self.selectizeObject.clearOptions();
+      self.options.forEach(function(option){
+        self.selectizeObject.addOption(option);
+      });
     }
   });
 </script>

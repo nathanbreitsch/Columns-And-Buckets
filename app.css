@@ -21,3 +21,8 @@ cb-bazaar > div.cb-bazaar{
 .main{
   padding-top: 50px;
 }
+
+static-json-source > div.static-json-source{
+  padding-top: 10px;
+  width: 100%;
+}

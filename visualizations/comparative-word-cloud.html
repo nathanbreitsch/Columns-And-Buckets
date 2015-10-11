@@ -1,0 +1,41 @@
+
+<!--<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>-->
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+<dom-module id="comparative-word-cloud">
+  <template>
+    
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'comparative-word-cloud',
+    properties: {
+      buckets:{
+        type: Array,
+        value: [
+          {
+            name: 'entity',
+            displayName: 'Entity',
+            description: 'Identifies source/speaker of passage'
+          },
+          {
+            name: 'passage',
+            displayName: 'Passage',
+            description: 'Free Text stated by entity'
+          },
+          {
+            name: 'index',
+            displayName: 'Index',
+            description: 'Chronological Identifier for passage'
+          }
+        ],
+        readOnly: true
+      }
+    },
+    ready: function(){
+
+    }
+  });
+</script>

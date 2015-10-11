@@ -1,20 +1,110 @@
-<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!--<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>-->
 <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
 
-<dom-module id="multiple-selectize">
+<dom-module id="static-json-source">
   <template>
+    <div class="container">
 
+
+      <div class="row">
+        <div class="form-inline" id="data">
+          <div class="form-group">
+            <label>URL: </label>
+            <input type=text value="{{jsonUrl::change}}"/>
+          </div>
+          <button class="btn btn-default" on-click="test">Test</button>
+          <button class="btn btn-success" disabled="{{!goodToGo}}" on-click="allGood" data-name="{{jsonUrl}}">All Good!</button>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Column Name</th>
+              <th>Display Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template is="dom-repeat" items="{{columns}}">
+              <tr>
+                <td>{{item.name}}</td>
+                <td>
+                  <input type="text" value="{{item.displayName::change}}"/>
+                </td>
+                <td>
+                  <input type="text" value="{{item.description::change}}"/>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </template>
 </dom-module>
 
 <script>
   Polymer({
-    is: 'something',
+    is: 'static-json-source',
     properties: {
 
     },
     ready: function(){
+      var self = this;
 
+
+      self.rows = [];
+      self.columns = [];
+
+      self.jsonUrl = "";
+      self.goodToGo = false;
+      self.error = false;
+
+      self.test = function(){
+        $.ajax({
+          url: self.jsonUrl,
+          contentType: 'text/json',
+          type: 'GET',
+          success: function(data){
+
+
+            self.error = false;
+            self.goodToGo = true;
+            self.rows = data;
+            first = data[0];
+            temp_cols = []
+            for(var key in first){
+              if(first.hasOwnProperty(key)){
+                temp_cols.push({
+                  name: key,
+                  displayName: key,
+                  description: ''
+                });
+              }
+            }
+            self.columns = temp_cols;
+            console.log(self.columns);
+          },
+          error: function(){
+            self.error = true;
+          }
+        })
+      };
+
+      self.allGood = function(){
+        self.fire('dataset-ready', {
+          columns: self.columns,
+          rows: self.rows
+        });
+      };
     }
   });
 </script>
+
+<style>
+  #data{
+
+  }
+</style>

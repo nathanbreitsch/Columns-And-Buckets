@@ -1,6 +1,4 @@
-
-<!--<script src="/bower_components/jquery/dist/jquery.js"></script>-->
-<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!--<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>-->
 <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
 
 <dom-module id="cb-bazaar">
@@ -30,12 +28,12 @@
             <img src="{{item.imageUrl}}" class="img img-responsive"></img>
           </div>
           <div class="col-xs-8">
-            <h4>{{item.name}}</h4>
+            <h4>{{item.displayName}}</h4>
             <p>{{item.description}}</p>
           </div>
           <div class="col-xs-2">
             <template is="dom-if" if="{{item.ready}}">
-              <button class="btn btn-success" on-click="connect" data-test="1" data-name="{{item.name}}">Let's Go!</button>
+              <button class="btn btn-success" on-click="connect" data-name="{{item.name}}">Let's Go!</button>
             </template>
             <template is="dom-if" if="{{!item.ready}}">
               <button class="btn btn-success" disabled>Enterprise</button>
@@ -79,40 +77,57 @@
           ready: true,
           type: 'data',
           componentUrl: '/data_sources/static-json-source.html',
-          name: 'Static JSON over HTTP',
+          displayName: 'Static JSON via GET Request',
+          name: 'static-json-source',
           description: 'This was the simplest thing I could hack up.',
-          imageUrl: 'http://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/0003/0859/brand.gif?itok=87NIjw_I'
+          imageUrl: '/img/dummy.gif'
         },
         {
           ready: false,
           type: 'data',
           componentUrl: '/data_sources/',
-          name: 'PostgreSQL',
+          displayName: 'PostgreSQL',
+          name: '',
           description: 'Retrieve data from table or query directly from your Postgres database.',
-          imageUrl: 'http://www.myintervals.com/blog/wp-content/uploads/2011/12/postgresql-logo1.png'
+          imageUrl: '/img/postgres.png'
         },
         {
           ready: false,
           type: 'data',
           componentUrl: '/data_sources/',
-          name: 'Microsoft Excel',
+          displayName: 'Microsoft Excel',
+          name: '',
           description: 'This is your ticket out of Excel Hell. ',
-          imageUrl: 'http://pubpages.unh.edu/~adc1/excel_logo.jpg'
+          imageUrl: '/img/excel.jpg'
         }
       ];
 
       self.visualizations = [
         {
-          ready: 'true',
-          name: 'Comparative Word Count',
-          description: 'Compare word frequency information across things, lol'
+          ready: true,
+          displayName: 'Comparative Word Count',
+          description: 'Compare word frequency information across things, lol',
+          imageUrl: '/img/word-cloud.jpg',
+          componentUrl:'',
+          type: 'vis',
+          name: ''
+        },
+        {
+          ready: false,
+          displayName: 'Github',
+          description: 'Import a C&B compatable web component from Github',
+          imageUrl: '/img/Octocat.png',
+          componentUrl:'',
+          type: 'vis',
+          name: ''
         }
       ];
 
       self.connect = function(event){
         self.fire('component-selection', {
           type: event.model.item.type,
-          url: event.model.item.componentUrl
+          url: event.model.item.componentUrl,
+          name: event.model.item.name
         });
       };
 
