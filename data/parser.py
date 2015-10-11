@@ -51,6 +51,30 @@ def make_json():
     file.write(json.dumps(out_records))
     file.close()
 
+def make_json_whitelist():
+    whitelist = ["Iraq", "Change", "Economy", "Business", "Change", "jobs", "reform", 'god', 'character', 'disgusting', 'obama', 'obamacare', 'healthcare', 'family', 'tax', 'taxes', 'liberal', 'conservative', 'war', 'syria','china', 'oil']
+    whitelist = map(lambda x: x.upper().strip(), whitelist)
+    file = open("better.csv", "r")
+    out_records = []
+    index = 0
+    for line in file.readlines():
+        (name, passage) = line.split(',')
+        passage_words = passage.split(' ')
+        for word in passage_words:
+            word = word.upper().strip()
+        passage = " ".join(passage_words)
+
+        out_records.append({
+            'name': name,
+            'passage': passage,
+            'index': index
+        })
+        index += 1
+    file.close()
+    file = open("debate-whitelist.json", "w")
+    file.write(json.dumps(out_records))
+    file.close()
+
 if __name__ == '__main__':
     #make_csv()
     make_json()

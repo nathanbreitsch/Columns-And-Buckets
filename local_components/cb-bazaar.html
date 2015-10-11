@@ -99,6 +99,15 @@
           name: '',
           description: 'This is your ticket out of Excel Hell. ',
           imageUrl: '/img/excel.jpg'
+        },
+        {
+          ready: false,
+          type: 'data',
+          componentUrl: '/data_sources/',
+          displayName: 'Spark',
+          name: '',
+          description: 'Something, something, real-time #bigdata etc.',
+          imageUrl: '/img/spark.png'
         }
       ];
 
@@ -106,8 +115,27 @@
         {
           ready: true,
           displayName: 'Comparative Word Count',
-          description: 'Compare word frequency information across things, lol',
-          imageUrl: '/img/word-cloud.jpg',
+          description: 'Compare word counts from multiple sources. Great for visualizing transcripts.',
+          imageUrl: '/img/compare.png',
+          componentUrl:'',
+          type: 'vis',
+          name: ''
+        },
+        {
+          ready: false,
+          displayName: 'Word Cloud',
+          description: 'Identify key concepts in free text data',
+          imageUrl: '/img/word-cloud.png',
+          componentUrl:'',
+          type: 'vis',
+          name: ''
+        },
+
+        {
+          ready: false,
+          displayName: 'Geographic Heat',
+          description: 'Visualize density across geographic coordinates',
+          imageUrl: '/img/geoheat.png',
           componentUrl:'',
           type: 'vis',
           name: ''
