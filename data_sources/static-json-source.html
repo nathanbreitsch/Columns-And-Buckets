@@ -63,14 +63,8 @@
       self.error = false;
 
       self.test = function(){
-        $.ajax({
-          url: self.jsonUrl,
-          contentType: 'jsonp',
-          type: 'GET',
-          success: function(data){
-
-
-            self.error = false;
+        $.getJSON(self.jsonUrl, function(data){
+          self.error = false;
             self.goodToGo = true;
             self.rows = data;
             first = data[0];
@@ -86,11 +80,8 @@
             }
             self.columns = temp_cols;
             console.log(self.columns);
-          },
-          error: function(){
-            self.error = true;
-          }
-        })
+        });
+       
       };
 
       self.allGood = function(){
