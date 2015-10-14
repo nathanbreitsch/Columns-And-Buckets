@@ -11,6 +11,7 @@
           <div class="form-group">
             <label>URL: </label>
             <input type=text value="{{jsonUrl::change}}"/>
+            <p>Example: https://raw.githubusercontent.com/nathanbreitsch/Columns-And-Buckets/master/data/debate-whitelist.json </p>
           </div>
           <button class="btn btn-default" on-click="test">Test</button>
           <button class="btn btn-success" disabled="{{!goodToGo}}" on-click="allGood" data-name="{{jsonUrl}}">All Good!</button>
